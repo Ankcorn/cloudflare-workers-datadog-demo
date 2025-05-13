@@ -12,9 +12,12 @@ type MetricsStore = {
 
 type Metric = {
       metric: string
-      type: string
+      type: string // 'gauge', 'count', 'histogram'
       tags: string[]
       points: [number, number][]
+      // For histograms, we'll use intervals to define distribution
+      intervals?: number[]
+      values?: number[]
     };
 
 const asyncLocalStorage = new AsyncLocalStorage<MetricsStore>();
@@ -65,8 +68,28 @@ export class Metrics {
    * @param {Number} value - Metric value
    * @param {Array} tags - Additional tags
    */
-  gauge(name: string, value: number, tags = []) {
+  gauge(name: string, value: number, tags: string[] = []) {
     this.record(name, value, 'gauge', tags);
+  }
+
+  /**
+   * Record a count metric
+   * @param {String} name - Metric name
+   * @param {Number} value - Metric value
+   * @param {Array} tags - Additional tags
+   */
+  count(name: string, value: number, tags: string[] = []) {
+    this.record(name, value, 'count', tags);
+  }
+
+  /**
+   * Record a histogram metric
+   * @param {String} name - Metric name
+   * @param {Number} value - Metric value to add to the histogram
+   * @param {Array} tags - Additional tags
+   */
+  histogram(name: string, value: number, tags: string[] = []) {
+    this.record(name, value, 'histogram', tags);
   }
 
 
@@ -74,7 +97,7 @@ export class Metrics {
    * Internal method to record a metric
    * @private
    */
-  record(name: string, value: number, type = 'gauge', additionalTags = []) {
+  record(name: string, value: number, type = 'gauge', additionalTags: string[] = []) {
 	// Unix timestamp in seconds
     const timestamp = Math.floor(Date.now() / 1000);
     const store = this.getStore();

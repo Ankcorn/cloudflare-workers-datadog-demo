@@ -54,10 +54,14 @@ app.use('*', async (c, next) => {
 app.get('/', async (c) => {
 	const session = c.get('session');
 
+	const metrics = new Metrics();
+	const now = Date.now();
 	// Fetch todos for the current user session
 	const { results: todos } = await c.env.DB.prepare('SELECT * FROM todos WHERE user_id = ? ORDER BY created_at DESC')
 		.bind(session)
 		.all<Todo>();
+
+	metrics.histogram('d1.query.latency', Date.now() - now, ['table:todos', 'operation:select']);
 
 	console.log('Fetched todos:', { todos, session });
 
@@ -175,10 +179,12 @@ app.get('/', async (c) => {
 
 app.post('/todos', async (c) => {
 	const session = c.get('session');
+	const metrics = new Metrics();
 	const formData = await c.req.parseBody();
 
 	// Create new todo
 	try {
+		const now = Date.now();
 		await c.env.DB.prepare(
 			`
 			INSERT INTO todos (user_id, title, description, priority, due_date)
@@ -187,7 +193,7 @@ app.post('/todos', async (c) => {
 		)
 			.bind(session, formData.title, formData.description || null, formData.priority || 'medium', formData.due_date || null)
 			.run();
-
+		metrics.histogram('d1.query.latency', Date.now() - now, ['table:todos', 'operation:insert']);
 		return c.redirect('/');
 	} catch (error) {
 		console.error('Failed to create todo:', error);
@@ -198,9 +204,11 @@ app.post('/todos', async (c) => {
 // Toggle todo completion status
 app.post('/todos/:id/toggle', async (c) => {
 	const session = c.get('session');
+	const metrics = new Metrics();
 	const todoId = c.req.param('id');
 
 	try {
+		const now = Date.now();
 		await c.env.DB.prepare(
 			`
 			UPDATE todos
@@ -211,7 +219,7 @@ app.post('/todos/:id/toggle', async (c) => {
 		)
 			.bind(todoId, session)
 			.run();
-
+		metrics.histogram('d1.query.latency', Date.now() - now, ['table:todos', 'operation:toggle']);
 		return c.redirect('/');
 	} catch (error) {
 		console.error('Failed to toggle todo status:', error);
@@ -223,8 +231,9 @@ app.post('/todos/:id/toggle', async (c) => {
 app.post('/todos/:id/delete', async (c) => {
 	const session = c.get('session');
 	const todoId = c.req.param('id');
-
+	const metrics = new Metrics();
 	try {
+		const now = Date.now();
 		await c.env.DB.prepare(
 			`
 			DELETE FROM todos
@@ -233,7 +242,7 @@ app.post('/todos/:id/delete', async (c) => {
 		)
 			.bind(todoId, session)
 			.run();
-
+		metrics.histogram('d1.query.latency', Date.now() - now, ['table:todos', 'operation:delete']);
 		return c.redirect('/');
 	} catch (error) {
 		console.error('Failed to delete todo:', error);
