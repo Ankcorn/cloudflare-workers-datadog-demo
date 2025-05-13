@@ -12,17 +12,15 @@ The demo consists of two Cloudflare Workers:
    - Integrating with D1 database for data storage
 
 2. **Datadog Tail Worker** (`workers/datadog-tail`): A worker that:
-   - Receives logs and traces from the Demo worker via Cloudflare's tail consumers
+   - Receives logs from the Demo worker via [Cloudflare's Tail Workers](https://developers.cloudflare.com/workers/observability/logs/tail-workers/)
    - Formats and forwards the data to Datadog's Logs API
    - Adds appropriate metadata and tags for better organization in Datadog
 
 ## Features
 
 - **Custom Metrics**: Track user sessions, application usage, and performance metrics
-- **Distributed Tracing**: Monitor request flows and identify bottlenecks
+- ~~**Distributed Tracing**~~: Monitor request flows and identify bottlenecks
 - **Logs Forwarding**: Centralize logs from all workers in Datadog
-- **Structured Logging**: Format logs with proper context for better analysis
-- **Error Tracking**: Automatically capture and report exceptions
 
 ## Getting Started
 
