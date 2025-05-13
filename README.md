@@ -147,8 +147,8 @@ After deploying both workers and making requests to the demo application:
 
 ### Logs and Traces Flow
 
-1. The Demo worker sends logs and traces to Cloudflare's built-in observability system
-2. The Datadog Tail worker receives these logs and traces via the Tail Consumers integration
+1. The Demo worker logs using the standard js console.log api
+2. The Datadog Tail worker receives these logs because of the Tail Consumers configuration
 3. The Tail worker formats the data according to Datadog's API requirements and adds relevant tags
 4. Formatted data is sent to Datadog's Logs API
 
