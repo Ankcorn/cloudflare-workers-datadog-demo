@@ -67,27 +67,6 @@ importers:
         specifier: ^4.14.4
         version: 4.14.4(@cloudflare/workers-types@4.20250513.0)
 
-  workers/tail:
-    devDependencies:
-      '@cloudflare/vitest-pool-workers':
-        specifier: ^0.8.19
-        version: 0.8.27(@cloudflare/workers-types@4.20250513.0)(@vitest/runner@3.0.9)(@vitest/snapshot@3.0.9)(vitest@3.0.9(@types/node@22.15.17))
-      '@cloudflare/workers-types':
-        specifier: ^4.20250513.0
-        version: 4.20250513.0
-      '@types/node':
-        specifier: ^22.15.17
-        version: 22.15.17
-      typescript:
-        specifier: ^5.5.2
-        version: 5.8.3
-      vitest:
-        specifier: ~3.0.7
-        version: 3.0.9(@types/node@22.15.17)
-      wrangler:
-        specifier: ^4.14.4
-        version: 4.14.4(@cloudflare/workers-types@4.20250513.0)
-
 packages:
 
   '@cloudflare/kv-asset-handler@0.4.0':
