@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { getCookie, setCookie } from 'hono/cookie';
 import { randomUUID } from 'node:crypto';
+import { Metrics } from './metrics'
 /**
  * Todo item type that matches the database schema
  */
@@ -26,6 +27,7 @@ export type TodoCreationRequest = Omit<Todo, 'id' | 'created_at' | 'updated_at' 
 const app = new Hono<{ Bindings: Env; Variables: { session: string } }>();
 
 app.use('*', async (c, next) => {
+	const metrics = new Metrics();
 	const cookie = getCookie(c, 'session');
 	if (!cookie) {
 		const session = randomUUID();
@@ -35,11 +37,15 @@ app.use('*', async (c, next) => {
 
 		c.set('session', session);
 		console.info('New user session created:', { session });
+		metrics.addTag('session', session);
+		metrics.gauge('session.created', 1);
 		await next();
 		return
 	}
 
 	c.set('session', cookie as string);
+	metrics.addTag('session', cookie as string);
+	metrics.gauge('session.reused', 1);
 	console.info('Existing user session used', { cookie });
 	await next();
 	return

@@ -1,6 +1,6 @@
 
 
-> datadog-tail@0.0.0 deploy /Users/thomas/cloudflare-workers-datadog-demo/workers/tail
+> datadog-tail@0.0.0 deploy /Users/thomas/cloudflare-workers-datadog-demo/workers/datadog-tail
 > wrangler deploy
 
 
@@ -8,12 +8,9 @@
 [38;2;255;136;0m-------------------------------------------------------[39m
 
 Total Upload: [32m26.95 KiB / gzip: 6.48 KiB[39m
-Worker Startup Time: 12 ms
+Worker Startup Time: 13 ms
 Your Worker has access to the following bindings:
 - Vars:
   - DATADOG_URL: "https://http-intake.logs.us3.datadogh..."
   - DATADOG_HOST: "cloudflare-workers-datadog"
-Uploaded datadog-tail (6.31 sec)
-Deployed datadog-tail triggers (1.17 sec)
-  https://datadog-tail.baselime.workers.dev
-Current Version ID: af6e3fa2-a80f-46b5-962e-4b6f5c43ca92
+Uploaded datadog-tail (6.33 sec)

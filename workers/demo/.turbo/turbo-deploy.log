@@ -7,16 +7,5 @@
  ⛅️ wrangler 4.14.4 (update available [32m4.15.0[39m)
 [38;2;255;136;0m-------------------------------------------------------[39m
 
-Total Upload: [32m84.12 KiB / gzip: 20.37 KiB[39m
-Worker Startup Time: 14 ms
-Your Worker has access to the following bindings:
-- D1 Databases:
-  - DB: demo_db (4c763890-0138-4230-914f-6b59ff0ab4fa)
-- Services:
-  - DEMO_RPC: demo
-Your Worker is sending Tail events to the following Workers:
-- datadog-tail
-Uploaded demo (7.20 sec)
-Deployed demo triggers (1.11 sec)
-  https://demo.baselime.workers.dev
-Current Version ID: b87b5771-07f9-41c1-a5b1-0a33aabba355
+Attempting to login via OAuth...
+Opening a link in your default browser: https://dash.cloudflare.com/oauth2/auth?response_type=code&client_id=54d11594-84e4-41aa-b438-e81b8fa78ee7&redirect_uri=http%3A%2F%2Flocalhost%3A8976%2Foauth%2Fcallback&scope=account%3Aread%20user%3Aread%20workers%3Awrite%20workers_kv%3Awrite%20workers_routes%3Awrite%20workers_scripts%3Awrite%20workers_tail%3Aread%20d1%3Awrite%20pages%3Awrite%20zone%3Aread%20ssl_certs%3Awrite%20ai%3Awrite%20queues%3Awrite%20pipelines%3Awrite%20secrets_store%3Awrite%20offline_access&state=ftxdeTJ4mOENy8zG_oydgd1PS_~at.hn&code_challenge=VQlihlR82-qWi4eriIDe-NoeIzKviJq_I78AhjnJ9HA&code_challenge_method=S256

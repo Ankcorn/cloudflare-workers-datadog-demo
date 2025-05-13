@@ -1,11 +1,20 @@
 
 import { instrument, type ResolveConfigFn } from '@microlabs/otel-cf-workers'
+import { Metrics } from './metrics'
 import api from "./api";
 
 
 const handler =  {
 	async fetch (request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return api.fetch(request, env, ctx);
+		const metrics = new Metrics()
+		return metrics.run({
+			apiKey: env.DATADOG_API_KEY,
+			apiUrl: 'https://api.us3.datadoghq.com/api/v1/series',
+		}, async () => {
+			const response = await api.fetch(request, env, ctx);
+			ctx.waitUntil(metrics.flush());
+			return response;
+		});
 	}
 };
 
