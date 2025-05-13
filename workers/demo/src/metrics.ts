@@ -154,7 +154,6 @@ export class Metrics {
 
       // Clear context metrics after successful submission
       if (response.ok) {
-		console.info('Flushed metrics to Datadog', { metrics, message: await response.text() });
         store.metrics.clear();
       }
 

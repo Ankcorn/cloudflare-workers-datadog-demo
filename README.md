@@ -2,6 +2,8 @@
 
 This project demonstrates how to integrate Cloudflare Workers with Datadog for comprehensive observability. It showcases how to send metrics, logs, and traces from your Cloudflare Workers to Datadog, providing you with real-time insights into your application's performance and behavior.
 
+![Datadog Logs Explorer showing Cloudflare Worker logs](logs.png)
+
 ## Project Overview
 
 The demo consists of two Cloudflare Workers:
