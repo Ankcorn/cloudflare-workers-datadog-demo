@@ -1,0 +1,21 @@
+{
+  "name": "cloudflare-workers-datadog",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "workers/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "test": "turbo test",
+    "deploy": "turbo deploy"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "turbo": "^2.5.3"
+  },
+  "packageManager": "pnpm@8.15.4",
+  "engines": {
+    "node": ">=22.15.0"
+  }
+}

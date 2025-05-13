@@ -1,0 +1,20 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "datadog-tail",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-05-13",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true
+	},
+	"vars": {
+		"DATADOG_URL": "https://http-intake.logs.us3.datadoghq.com/api/v2/logs",
+		"DATADOG_HOST": "cloudflare-workers-datadog"
+	}
+}

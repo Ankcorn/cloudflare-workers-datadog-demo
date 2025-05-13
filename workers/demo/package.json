@@ -1,0 +1,24 @@
+{
+	"name": "demo",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"test": "vitest",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"@cloudflare/workers-types": "^4.20250513.0",
+		"@types/node": "^22.15.17",
+		"typescript": "^5.5.2",
+		"vitest": "~3.0.7",
+		"wrangler": "^4.14.4"
+	},
+	"dependencies": {
+		"@microlabs/otel-cf-workers": "1.0.0-rc.49",
+		"@opentelemetry/api": "^1.9.0",
+		"hono": "^4.7.9"
+	}
+}

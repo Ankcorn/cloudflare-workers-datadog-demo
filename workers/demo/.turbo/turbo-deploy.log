@@ -1,0 +1,22 @@
+
+
+> demo@0.0.0 deploy /Users/thomas/cloudflare-workers-datadog-demo/workers/demo
+> wrangler deploy
+
+
+ ⛅️ wrangler 4.14.4 (update available [32m4.15.0[39m)
+[38;2;255;136;0m-------------------------------------------------------[39m
+
+Total Upload: [32m84.12 KiB / gzip: 20.37 KiB[39m
+Worker Startup Time: 14 ms
+Your Worker has access to the following bindings:
+- D1 Databases:
+  - DB: demo_db (4c763890-0138-4230-914f-6b59ff0ab4fa)
+- Services:
+  - DEMO_RPC: demo
+Your Worker is sending Tail events to the following Workers:
+- datadog-tail
+Uploaded demo (7.20 sec)
+Deployed demo triggers (1.11 sec)
+  https://demo.baselime.workers.dev
+Current Version ID: b87b5771-07f9-41c1-a5b1-0a33aabba355

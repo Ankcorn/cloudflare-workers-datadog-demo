@@ -1,0 +1,34 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "demo",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-05-13",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true
+	},
+	"tail_consumers": [
+		{
+			"service": "datadog-tail",
+		}
+	],
+	"services": [
+		{
+			"service": "demo",
+			"binding": "DEMO_RPC",
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "demo_db",
+			"database_id": "4c763890-0138-4230-914f-6b59ff0ab4fa"
+		}
+	]
+}
