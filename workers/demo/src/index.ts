@@ -2,6 +2,7 @@
 import { instrument, type ResolveConfigFn } from '@microlabs/otel-cf-workers'
 import { Metrics } from './metrics'
 import api from "./api";
+export { Counter } from './counter'
 
 
 const handler =  {

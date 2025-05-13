@@ -30,5 +30,19 @@
 			"database_name": "demo_db",
 			"database_id": "4c763890-0138-4230-914f-6b59ff0ab4fa"
 		}
+	],
+	"durable_objects": {
+		"bindings": [{
+			"name": "COUNTER",
+			"class_name": "Counter",
+		}]
+	},
+	"migrations": [
+		{
+			"tag": "2025-05-13",
+			"new_classes": [
+				"Counter"
+			]
+		}
 	]
 }

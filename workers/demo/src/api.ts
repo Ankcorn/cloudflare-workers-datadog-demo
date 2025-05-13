@@ -61,10 +61,14 @@ app.get('/', async (c) => {
 		.bind(session)
 		.all<Todo>();
 
+
 	metrics.histogram('d1.query.latency', Date.now() - now, ['table:todos', 'operation:select']);
 
 	console.log('Fetched todos:', { todos, session });
 
+	const pageViewCounterName = c.env.COUNTER.idFromName(`page-view-${session}`);
+	const pageViews = c.env.COUNTER.get(pageViewCounterName);
+	const views = await pageViews.increment(1, session);
 	// HTML template for the todo list UI with Tailwind CSS
 	const html = `
 	<!DOCTYPE html>
@@ -91,6 +95,16 @@ app.get('/', async (c) => {
 	<body class="bg-gray-100 min-h-screen p-6 font-sans">
 		<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
 			<h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Todo List</h1>
+			<div class="flex justify-center mb-6">
+				<div class="bg-blue-50 text-blue-600 px-4 py-2 rounded-full shadow-sm border border-blue-100 inline-flex items-center">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+						<path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+						<path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+					</svg>
+					<span class="font-medium">${views.toLocaleString()}</span>
+					<span class="ml-1 text-blue-500 text-sm">page views</span>
+				</div>
+			</div>
 
 			<div class="mb-8 bg-gray-50 p-4 rounded-md">
 				<form action="/todos" method="POST" class="space-y-4">
